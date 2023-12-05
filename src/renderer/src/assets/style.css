@@ -16,6 +16,12 @@ body {
   background-color: #2f3241;
 }
 
+:root {
+  --text: #9feaf9;
+  --background-primary: #26282e;
+  --background-secondary: #474D65;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -29,7 +35,7 @@ code {
   font-weight: 600;
   padding: 3px 5px;
   border-radius: 2px;
-  background-color: #26282e;
+  background-color: var(--background-primary);
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -42,7 +48,7 @@ code {
 }
 
 a {
-  color: #9feaf9;
+  color: var(--text);
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;

@@ -5,7 +5,6 @@
   $: data = undefined;
   window.electron.ipcRenderer.on('get-device-data', (_evt, message) => {
     data = message;
-    console.log(data);
   })
 
   $: processor = data?.processor;

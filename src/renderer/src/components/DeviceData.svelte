@@ -33,6 +33,7 @@
     flex-direction: column; 
     align-items: center; 
     width: 100%;
+    z-index: 3;
   }
   .versions {
     margin: 0 auto;

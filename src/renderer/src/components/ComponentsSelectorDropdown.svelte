@@ -1,11 +1,13 @@
 <script lang="ts">
   import { ComponentsStore } from "../stores/ComponentsStore";
+  import { PerformanceFilesStore } from "../stores/PerformanceFilesStore"
   import Dropdown from "./Dropdown.svelte"
 
     export let show: boolean;
     export let selectedGame: string;
     export let xPosition: number;
     export let yPosition: number;
+    export let performanceFilesPage: boolean;
 
     $: data = {
         processors: [],
@@ -21,28 +23,18 @@
     let selectedRam: string;
 
     const onSubmit = async () => {
-        const requestBody = {
-            processorId: selectedProcessor,
-            graphicsCardId: selectedGraphics,
-            ramId: selectedRam,
-            gameId: selectedGame
-        }
-
-        const response = await fetch('http://localhost:8080/performance_files', 
+        const response = await fetch(`http://localhost:8080/performance_files/${selectedGame}?processorId=${selectedProcessor}&graphicsId=${selectedGraphics}&ramId=${selectedRam}`, 
         {
-            method: 'POST', 
-            headers: 
-            {
-                "Accept": 'application/json',
-                "Content-Type": "application/json"
-            }, 
-            body: JSON.stringify(requestBody)
+            method: 'GET', 
         }
         );
 
         response.json().then((data) => {
-            console.log(data);
-        })
+            PerformanceFilesStore().set(data);
+        });
+
+        performanceFilesPage = true;
+        show = false;
     }
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -88,6 +80,7 @@
         width: 100px;
         height: 25px;
         font-family: 'Menlo', 'Lucida Console', monospace;
+        cursor: pointer;
     }
 
     h4 {

@@ -2,12 +2,15 @@
   import ComponentsSelectorDropdown from './components/ComponentsSelectorDropdown.svelte'
 import DeviceData from './components/DeviceData.svelte';
   import GameListItem from './components/GameListItem.svelte'
+  import PerformanceFiles from './pages/PerformanceFiles.svelte'
   import {GamesStore} from './stores/GamesStore';
 
   let gamesResp = [];
   GamesStore().subscribe((value) => {
     gamesResp = value;
   })
+
+  $: isPerformanceFilesPageVisible = false;
 
   $: games = gamesResp;
   $: showComponentsDropdown = false;
@@ -19,10 +22,18 @@ import DeviceData from './components/DeviceData.svelte';
 
 <div class="container">
   {#if showComponentsDropdown}
-      <ComponentsSelectorDropdown bind:selectedGame={selectedGame} bind:show={showComponentsDropdown} bind:xPosition={cursorX} bind:yPosition={cursorY} />
+      <ComponentsSelectorDropdown 
+      bind:selectedGame={selectedGame}
+      bind:show={showComponentsDropdown}
+      bind:xPosition={cursorX}
+      bind:yPosition={cursorY}
+      bind:performanceFilesPage={isPerformanceFilesPageVisible} />
   {/if}
   <DeviceData />
 
+  {#if isPerformanceFilesPageVisible}
+    <PerformanceFiles bind:performanceFilesPage={isPerformanceFilesPageVisible} />
+  {/if}
   <div style="width: 100%">
     <h1>Available games: </h1>
     {#each games as game}

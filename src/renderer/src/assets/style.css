@@ -107,3 +107,17 @@ a:hover {
   font-family: 'Raleway';
   cursor: pointer;
 }
+
+label {
+  font-family: 'Raleway';
+  color: var(--text);
+  font-weight: 600;
+}
+
+input {
+  background-color: var(--background-primary);
+  border: none;
+  border-radius: 2px;
+  height: 25px;
+  width: 225px;
+}

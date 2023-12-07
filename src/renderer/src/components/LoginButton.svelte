@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ButtonPrimary from "./ButtonPrimary.svelte"
+  import ButtonPrimary from "./common/buttons/ButtonPrimary.svelte"
 
     export let isLoggedIn: boolean;
     export let onLogin: () => void;

@@ -15,12 +15,6 @@
 </select>
 </div>
 <style>
-    label {
-        font-family: 'Raleway';
-        color: var(--text);
-        font-weight: 600;
-    }
-
     .dropdownInput {
         background-color: var(--background-primary);
         color: var(--text);

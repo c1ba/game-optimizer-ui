@@ -1,3 +1,33 @@
+@font-face {
+  font-family: Raleway;
+  src: url(./Raleway/static/Raleway-ExtraLight.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(./Raleway/static/Raleway-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(./Raleway/static/Raleway-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(./Raleway/static/Raleway-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url(./Raleway/static/Raleway-Bold.ttf);
+  font-weight: 700;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -12,14 +42,20 @@ body {
     'Cantarell',
     'Open Sans',
     sans-serif;
-  color: #86a5b1;
-  background-color: #2f3241;
+  color: var(--text);
+  background-color: var(--background-primary);
+}
+
+h1, h2, h3, h4, h5, h6, a, p {
+  font-family: 'Raleway';
 }
 
 :root {
-  --text: #9feaf9;
-  --background-primary: #26282e;
-  --background-secondary: #474D65;
+  --text: #D7DBE7;
+  --background-primary: #060B1C;
+  --background-secondary: #0D1736;
+  --background-code: #1E1F24;
+  --text-code: #00DEDE;
 }
 
 * {
@@ -57,4 +93,31 @@ a {
 
 a:hover {
   border-bottom: 1px solid;
+}
+
+.buttonPrimary {
+  text-decoration: none;
+  background-color: #00A8CB;
+  font-weight: 600;
+  color: var(--text);
+  border: none;
+  border-radius: 2px;
+  width: 100px;
+  height: 25px;
+  font-family: 'Raleway';
+  cursor: pointer;
+}
+
+label {
+  font-family: 'Raleway';
+  color: var(--text);
+  font-weight: 600;
+}
+
+input {
+  background-color: var(--background-primary);
+  border: none;
+  border-radius: 2px;
+  height: 25px;
+  width: 225px;
 }

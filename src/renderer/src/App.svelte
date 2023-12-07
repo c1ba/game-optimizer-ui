@@ -1,16 +1,19 @@
 <script lang="ts">
   import ComponentsSelectorDropdown from './components/ComponentsSelectorDropdown.svelte'
-import DeviceData from './components/DeviceData.svelte';
+  import DeviceData from './components/DeviceData.svelte';
   import GameListItem from './components/GameListItem.svelte'
+  import LoginPopUp from './components/LoginPopUp.svelte'
+  import UserInfo from './components/UserInfo.svelte'
   import PerformanceFiles from './pages/PerformanceFiles.svelte'
   import {GamesStore} from './stores/GamesStore';
 
-  let gamesResp = [];
+  $: gamesResp = [];
   GamesStore().subscribe((value) => {
     gamesResp = value;
-  })
+  });
 
   $: isPerformanceFilesPageVisible = false;
+  $: isLoginVisible = false;
 
   $: games = gamesResp;
   $: showComponentsDropdown = false;
@@ -29,13 +32,15 @@ import DeviceData from './components/DeviceData.svelte';
       bind:yPosition={cursorY}
       bind:performanceFilesPage={isPerformanceFilesPageVisible} />
   {/if}
+  <LoginPopUp bind:showLogin={isLoginVisible} />
+  <UserInfo bind:isLoginVisible={isLoginVisible} style="margin-bottom: 10px;" />
   <DeviceData />
 
   {#if isPerformanceFilesPageVisible}
     <PerformanceFiles bind:performanceFilesPage={isPerformanceFilesPageVisible} />
   {/if}
-  <div style="width: 100%">
-    <h1>Available games: </h1>
+  <div style="width: 100%; margin-top: 15px; overflowX: hidden; overflowY: auto;">
+    <h1 style="margin-bottom: 10px;">Available games: </h1>
     {#each games as game}
       <GameListItem game={game} on:click={(event) => {
         selectedGame = game.id;

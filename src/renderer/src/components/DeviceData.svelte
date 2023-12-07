@@ -13,7 +13,7 @@
 </script>
 
 <div class="header_container">
-  <h1 style="margin-bottom: 25px;">Your Device:</h1>
+  <h2 style="margin-bottom: 25px; font-family: 'Menlo', 'Lucida Console', monospace; font-weight: 300;">Your Device:</h2>
   <ul class="versions">
     {#if data}
     <li>{processor.brand} - {processor.speed} GHz</li>
@@ -34,6 +34,11 @@
     align-items: center; 
     width: 100%;
     z-index: 3;
+    background-color: var(--background-code);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 4px;
+    color: var(--text-code);
   }
   .versions {
     margin: 0 auto;
@@ -41,7 +46,6 @@
     clear: both;
     overflow: hidden;
     font-family: 'Menlo', 'Lucida Console', monospace;
-    color: #c2f5ff;
     line-height: 1;
     transition: all 0.3s;
   }

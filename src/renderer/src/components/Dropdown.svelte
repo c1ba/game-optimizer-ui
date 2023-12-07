@@ -1,20 +1,9 @@
 <script lang="ts">
+  import { capacityType } from "../stores/ComponentsStore"
+
     export let bindValue;
     export let data;
     export let name;
-
-    const capacityType = (componentType: string) => {
-        switch (componentType) {
-            case 'PROCESSOR':
-                return 'GHz';
-            case 'GRAPHICS_CARD':
-                return 'GB';
-            case 'RAM':
-                return 'GB';
-            default:
-                    return '';
-        }
-    }
 </script>
 <div>
 <label for="dropdown">{name}</label>
@@ -26,12 +15,6 @@
 </select>
 </div>
 <style>
-    label {
-        font-family: 'Menlo', 'Lucida Console', monospace;
-        color: var(--text);
-        font-weight: 500;
-    }
-
     .dropdownInput {
         background-color: var(--background-primary);
         color: var(--text);

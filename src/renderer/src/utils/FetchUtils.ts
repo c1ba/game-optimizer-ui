@@ -1,32 +1,31 @@
-export async function fetchData(data, set, url) {
+import { api } from "../services/api";
+
+export async function fetchData(initialValue, set, url) {
 	try {
 		// 5. Dispatch the request for the users
-	  const response = await fetch(`http://localhost:8080${url}`);
+	  const response = (await api.get(url));
 		
-		if(response.ok) {
-  	      const data = await response.json();
-		  set(data);
+		if(response.status === 200) {
+		  set(response.data);
 			
 		} else {
-			const text = await response.text();
+			const text = response.statusText;
 			throw new Error(text);
 		}
 		
 	} catch(error) {
-		// 6b. if there is a fetch error - deal with it
-		// and let observers know
-		data.error = error;
-		set(data);
+		console.error(error);
+		set(initialValue);
 	}
 }
 
-export function makeSubscribe(data, _args, url) {
+export function makeSubscribe(initialValue: unknown, _args: unknown, url: string) {
 	// 2. Create a closure with access to the 
 	// initial data and initialization arguments
 	return set => {
 		// 3. This won't get executed until the store has 
 		// its first subscriber. Kick off retrieval.
-		fetchData(data, set, url);
+		fetchData(initialValue, set, url);
 		
 		// 4. We're not waiting for the response.
 		// Return the unsubscribe function which doesn't do

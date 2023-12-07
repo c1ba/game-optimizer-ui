@@ -18,7 +18,7 @@ body {
 
 :root {
   --text: #9feaf9;
-  --background-primary: #26282e;
+  --background-primary: #2f3241;
   --background-secondary: #474D65;
 }
 
@@ -57,4 +57,16 @@ a {
 
 a:hover {
   border-bottom: 1px solid;
+}
+
+.buttonPrimary {
+  text-decoration: none;
+  background-color: var(--text);
+  color: var(--background-primary);
+  border: none;
+  border-radius: 2px;
+  width: 100px;
+  height: 25px;
+  font-family: 'Menlo', 'Lucida Console', monospace;
+  cursor: pointer;
 }

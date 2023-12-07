@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ComponentsStore } from "../stores/ComponentsStore";
-  import { PerformanceFilesStore } from "../stores/PerformanceFilesStore"
+  import { getPerformanceFilesByGameAndComponents } from "../stores/PerformanceFilesStore";
+  import ButtonPrimary from "./Button/ButtonPrimary.svelte";
   import Dropdown from "./Dropdown.svelte"
 
     export let show: boolean;
@@ -23,16 +24,13 @@
     let selectedRam: string;
 
     const onSubmit = async () => {
-        const response = await fetch(`http://localhost:8080/performance_files/${selectedGame}?processorId=${selectedProcessor}&graphicsId=${selectedGraphics}&ramId=${selectedRam}`, 
+       await getPerformanceFilesByGameAndComponents(
         {
-            method: 'GET', 
-        }
-        );
-
-        response.json().then((data) => {
-            PerformanceFilesStore().set(data);
+            gameId: selectedGame,
+            processorId: selectedProcessor,
+            graphicsId: selectedGraphics,
+            ramId: selectedRam
         });
-
         performanceFilesPage = true;
         show = false;
     }
@@ -51,7 +49,7 @@
         {#if data.rams}
         <Dropdown bind:bindValue={selectedRam} name="Ram" data={data.rams} />
         {/if}
-        <button on:click={onSubmit}>Submit!</button>
+        <ButtonPrimary onClick={onSubmit} text="Submit!" />
     </div>
     <div on:click={() => show = !show} style="width: 100vw; height: 100vh; position: absolute; overflow: hidden; z-index: 1;">
     </div>
@@ -69,18 +67,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-    }
-
-    button {
-        text-decoration: none;
-        background-color: var(--text);
-        color: var(--background-primary);
-        border: none;
-        border-radius: 2px;
-        width: 100px;
-        height: 25px;
-        font-family: 'Menlo', 'Lucida Console', monospace;
-        cursor: pointer;
     }
 
     h4 {

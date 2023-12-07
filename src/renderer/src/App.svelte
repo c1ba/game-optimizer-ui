@@ -40,7 +40,7 @@
       bind:performanceFilesPage={isPerformanceFilesPageVisible} />
   {/if}
   <LoginPopUp bind:showLogin={isLoginVisible} />
-  <div style="width: 100vw; padding-left: 10px; display: flex; align-items: center; gap: 10px;">
+  <div style="width: 100vw; padding-right: 40px; display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
     <h2 style="z-index: 3;">{userData != null ? userData.username : "Guest"}</h2>
       <LoginButton isLoggedIn={userData != null} onLogin={() => isLoginVisible = !isLoginVisible} onLogout={saveLogout} texts={{login: "Log in", logout: "Log out"}} />
   </div>
@@ -50,7 +50,7 @@
     <PerformanceFiles bind:performanceFilesPage={isPerformanceFilesPageVisible} />
   {/if}
   <div style="width: 100%; margin-top: 15px;">
-    <h1>Available games: </h1>
+    <h1 style="margin-bottom: 10px;">Available games: </h1>
     {#each games as game}
       <GameListItem game={game} on:click={(event) => {
         selectedGame = game.id;

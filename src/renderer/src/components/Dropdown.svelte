@@ -16,9 +16,9 @@
 </div>
 <style>
     label {
-        font-family: 'Menlo', 'Lucida Console', monospace;
+        font-family: 'Raleway';
         color: var(--text);
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .dropdownInput {

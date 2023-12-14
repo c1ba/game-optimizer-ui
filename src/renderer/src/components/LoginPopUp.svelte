@@ -3,6 +3,7 @@
   import { saveLogin } from "../stores/UserStore"
   import ButtonPrimary from './common/buttons/ButtonPrimary.svelte';
   import GeneralWindow from "./common/windows/GeneralWindow.svelte"
+  import { DeviceStore } from "../stores/DeviceStore"
 
     export let showLogin: boolean;
 
@@ -26,6 +27,7 @@
 
             const response = await api.post('/login', requestBody);
             saveLogin(response.data);
+
             showLogin = !showLogin;
         }
         catch (error) {
@@ -40,6 +42,7 @@
             }
             
         }
+        await api.post('/component_combos', $DeviceStore, {headers: {"Authorization": `Bearer ${localStorage.getItem("apiKey")}`}});
     }
 </script>
 <GeneralWindow width={"50vw"} height={"30vh"} bind:show={showLogin}>
@@ -51,3 +54,8 @@
     <ButtonPrimary style="width: 125px; height: 35px; font-size: 17px;" onClick={onSubmit} text="Log In!" />
     <p>{errorMessage}</p>
 </GeneralWindow>
+<style>
+    input {
+        color: #FFFFFF;
+    }
+</style>

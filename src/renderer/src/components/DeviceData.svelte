@@ -1,9 +1,5 @@
 <script lang="ts">
   import { DeviceStore } from "../stores/DeviceStore"
-
-  // import { electronAPI } from "@electron-toolkit/preload"
-
-  // console.log(electronAPI.process.versions)
   $: data = undefined;
   window.electron.ipcRenderer.on('get-device-data', (_evt, message) => {
     data = message;

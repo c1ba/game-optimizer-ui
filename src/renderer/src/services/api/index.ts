@@ -6,7 +6,6 @@ export const api = axios.create(
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Authorization": localStorage.getItem("apiKey") != null ? `Bearer ${localStorage.getItem("apiKey")}` : ""
         },
     }
 );

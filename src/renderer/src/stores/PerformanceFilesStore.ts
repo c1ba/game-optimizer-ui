@@ -11,12 +11,10 @@ export type PerformanceFilesType = {
     by: string;
 }
 
-export const PerformanceFilesStore = () => {
-    return writable([]);
-};
+export const PerformanceFilesStore =  writable([]);
 
 export const getPerformanceFilesByGameAndComponents = async (args: {gameId: string; processorId: string; graphicsId: string; ramId: string;}) => {
     const response = await api.get(`/performance_files/${args.gameId}?processorId=${args.processorId}&graphicsId=${args.graphicsId}&ramId=${args.ramId}`);
-    PerformanceFilesStore().set(response.data);
+    PerformanceFilesStore.set(response.data);
     return response.data;
 }

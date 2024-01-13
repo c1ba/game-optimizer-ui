@@ -14,6 +14,7 @@ async function createWindow() {
   const memoryData = await si.mem(function(data) {
     return data;
   });
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 900,

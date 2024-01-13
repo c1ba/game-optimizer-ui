@@ -24,16 +24,18 @@
 </script>
 
 <div class="container">
+  {#if showComponentsDropdown}
   <ComponentsSelectorDropdown 
-      bind:selectedGame={selectedGame}
-      bind:show={showComponentsDropdown}
-      bind:xPosition={cursorX}
-      bind:yPosition={cursorY}
-      bind:performanceFilesPage={isPerformanceFilesPageVisible} />
+  bind:selectedGame={selectedGame}
+  bind:show={showComponentsDropdown}
+  bind:xPosition={cursorX}
+  bind:yPosition={cursorY}
+  bind:performanceFilesPage={isPerformanceFilesPageVisible} />
+  {/if}
   {#if isLoginVisible}
     <LoginPopUp bind:showLogin={isLoginVisible} />
   {/if}
-  <UserInfo bind:isLoginVisible={isLoginVisible} style="margin-bottom: 10px;" />
+  <UserInfo bind:isPefromanceFilesPageOpen={isPerformanceFilesPageVisible} bind:isLoginVisible={isLoginVisible} style="margin-bottom: 10px;" />
   <DeviceData />
 
   {#if isPerformanceFilesPageVisible}

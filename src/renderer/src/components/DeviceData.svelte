@@ -1,10 +1,23 @@
 <script lang="ts">
-  // import { electronAPI } from "@electron-toolkit/preload"
-
-  // console.log(electronAPI.process.versions)
+  import { DeviceStore } from "../stores/DeviceStore"
   $: data = undefined;
   window.electron.ipcRenderer.on('get-device-data', (_evt, message) => {
     data = message;
+    DeviceStore.update(
+      () => ({
+        processor: {
+          name: message.processor.brand,
+          capacity: parseFloat(message.processor.speed)
+        },
+        graphicsCard: {
+          name: message.graphics.controllers[0].model,
+          capacity: message.graphics.controllers[0].vram / 1024
+        },
+        ram: {
+          capacity: Math.round((message.ram.total * Math.pow(10, -9)) - (message.ram.swaptotal * Math.pow(10, -9)))
+        }
+      })
+    )
   })
 
   $: processor = data?.processor;
@@ -22,7 +35,7 @@
       <li>{controller.model} - {controller.vram / 1024} GB</li>
     {/each }
     {/if}
-    <li>{Math.round(ram.total * Math.pow(10, -9))} GB RAM</li>
+    <li>{Math.round((ram.total * Math.pow(10, -9)) - (ram.swaptotal * Math.pow(10, -9)))} GB RAM</li>
     {/if}
   </ul>
 </div>
